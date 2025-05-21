@@ -54,6 +54,7 @@ public class MyApp
 
         // Arrays Multidimensionais
 
+        /* 
         int[][] dias = new int[3][3];
         dias[0][0] = 32;
         dias[0][1] = 33;
@@ -78,7 +79,21 @@ public class MyApp
             }
             
         }
+        */
 
+        // Arrays Multidimensionais - Inicialização
+        int [][] arrayInt = new int[3][];
+
+        arrayInt[0] = new int[2];
+        arrayInt[1] = new int[3];
+        arrayInt[2] = new int[4];
+
+        for (int[] arrayBase: arrayInt) {
+            System.out.println("\n---------");
+            for (int num: arrayBase) {
+                System.out.print(num + " ");
+            }
+        }
 
     }
 }
