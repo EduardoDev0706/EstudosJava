@@ -39,3 +39,4 @@ public class RegistroClimatico {
 class LeituraClima {
 	int temperatura, umidade;
 }
+
