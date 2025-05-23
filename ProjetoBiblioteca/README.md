@@ -30,3 +30,7 @@ Este projeto é um sistema simples para cadastro, listagem, busca e remoção de
 1. Compile o programa:
    ```bash
    javac Biblioteca.java
+2. Execute o programa:
+   ```bash
+   java Biblioteca.java
+   
