@@ -4,6 +4,8 @@
 
 Este projeto é um sistema simples para cadastro, listagem, busca e remoção de livros em uma biblioteca fictícia chamada "Biblioteca de Alexandria". Desenvolvido em Java, o programa utiliza leitura e escrita de arquivos para armazenar os dados dos livros em um arquivo de texto (`livros.txt`).
 
+OBS: Projeto [Temporário], pode sofrer alterações conforme o aprofundamento em estudos de POO e JavaFX.
+
 ---
 
 ## Funcionalidades
