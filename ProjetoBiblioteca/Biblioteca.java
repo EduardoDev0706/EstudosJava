@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +13,8 @@ public class Biblioteca {
         Scanner myObj = new Scanner(System.in);
 
         do {
+            limparConsole();
+
         System.out.println("====================================");
         System.out.println("Bem-vindo a Biblioteca de Alexandria");
         System.out.println("===================================="); 
@@ -21,6 +25,7 @@ public class Biblioteca {
         System.out.println("5 - Sair");
         System.out.println();
         System.out.println("Escolha uma opção");
+        
         opcao = myObj.nextInt();
         myObj.nextLine();
 
@@ -36,7 +41,7 @@ public class Biblioteca {
                 buscarLivro(myObj); 
                 break;
             case 4:
-                // removerLivros();
+                removerLivro(myObj);
                 break;
             case 5:
                 System.out.println("Encerrando...");
@@ -44,10 +49,27 @@ public class Biblioteca {
             default:
                 System.out.println("Opção inválida.");
         }
+
+        if (opcao != 5) {
+            System.out.print("\nPressione ENTER para continuar...");
+            myObj.nextLine();
+        }   
+
     } while (opcao != 5);
             
             myObj.close();
-        
+    }
+
+    public static void limparConsole() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                new ProcessBuilder("clear").inheritIO().start().waitFor();
+            }
+        } catch (IOException | InterruptedException ex) {
+            System.out.println("Não foi possível limpar o console.");
+        }
     }
 
     public static void cadastrarLivro(Scanner myObj) {
@@ -124,6 +146,45 @@ public class Biblioteca {
             br.close();
         }catch (IOException e) {
             System.out.println("Erro na busca.");
+        }
+    }
+
+    public static void removerLivro(Scanner myObj) {
+        try {
+            System.out.println("Digite o nome do livro a remover: ");
+            String nomeRemover = myObj.nextLine();
+
+            File inputFile = new File("livros.txt");
+            File tempFile = new File("livros_temp.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String linha;
+            boolean removido = false;
+
+            while ((linha = reader.readLine()) != null) {
+                if (!linha.contains(nomeRemover)) {
+                    writer.write(linha + "\n");
+                } else {
+                    removido = true;
+                }
+            }
+
+            reader.close();
+            writer.close();
+
+            inputFile.delete();
+            tempFile.renameTo(inputFile);
+
+            if (removido) {
+                System.out.println("Livro removido com sucesso!");
+            } else {
+                System.out.println("Um livro com este nome não foi encontrado.");
+            }
+
+        } catch (IOException e) {
+            System.out.println("Erro ao remover o livro.");
         }
     }
 }
